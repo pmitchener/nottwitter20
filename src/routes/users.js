@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const {getGamesByUser} = require('../helpers/dataHelpers');
-
 /* GET users listing. */
 module.exports = ({ updateUser, getUsers }) => {
   /* GET users listing. */

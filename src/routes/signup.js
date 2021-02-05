@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-// register routes
+// signup routes
 module.exports = ({ addUser }) => {
   
   router.get('/', (req, res) => {
