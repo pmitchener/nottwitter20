@@ -1,0 +1,1 @@
+run the command  'npm run db:reset' at the node command line to reset database.

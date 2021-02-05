@@ -4,9 +4,13 @@ const cookieParser = require('cookie-parser');
 const twitter20 = express();
 const cookieSession = require('cookie-session');
 
+const db = require('./db');
+const dbHelper = require('./helpers/dbHelper')(db);
+
 const mainRoute = require('./routes/index');
 const userRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
+const signupRoutes = require('./routes/signup');
 
 twitter20.use(express.json());
 twitter20.use(express.urlencoded({ extended: false }));
@@ -22,8 +26,9 @@ twitter20.use(cookieSession({
 }));
 
 //twitter20.use('/', mainRoute);
-twitter20.use('/api/users', userRoutes(dbHelper));
-twitter20.use('/api/login', loginRoutes(dbHelper));
+twitter20.use('/users', userRoutes(dbHelper));
+twitter20.use('/login', loginRoutes(dbHelper));
+twitter20.use('/signup', signupRoutes(dbHelper));
 
 //catch unregistered routes issue
 twitter20.use((req, res, next) => {

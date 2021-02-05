@@ -9,7 +9,20 @@ module.exports = (db) => {
       .then((result) => result.rows)
       .catch((err) => err);
   };
+  const getUserProfile = (id) => {
+    const query = {
+      text: 
+        `SELECT users.id, username, email, firstname, lastname, avatar FROM users
+         WHERE users.id = $1`,
+      values: [id]
+    };
 
+    return db
+      .query(query)
+      .then((result) => result.rows)
+      .catch((err) => console.error('query error', err.stack));
+  };
+    
   const addUser = (newUser) => {
     const query = {
       text: `INSERT INTO users (username, email, password, avatar)
@@ -55,6 +68,7 @@ module.exports = (db) => {
 
   return {
     getUsers,
+    getUserProfile,
     addUser,
     loginUser,
     updateUser
