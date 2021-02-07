@@ -4,7 +4,9 @@
   "description": "speer.io backend api assessment",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/nodemon -L ./src/index.js",
+    "commentedout-pretest": "eslint --ignore-path .gitignore .",
+    "test": "./node_modules/.bin/mocha",
     "db:reset": "node ./db/reset.js"
   },
   "author": "Patrick Mitchener",
@@ -19,7 +21,10 @@
     "pg-native": "^3.0.0"
   },
   "devDependencies": {
+    "chai": "^4.3.0",
+    "chai-http": "^4.3.0",
     "dotenv": "^8.2.0",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.7"
   }
 }

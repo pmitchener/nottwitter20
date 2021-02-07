@@ -11,26 +11,22 @@ module.exports = ({ addUser }) => {
 
   router.post('/', (req, res) => {
     const newUser = {
-      username: req.body.username,
+      name: req.body.name,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
-      avatar: req.body.avatar
+      avatar: req.body.avatar,
     };
     addUser(newUser)
       .then(result => {
-        console.log('User signup results:', result);
-        /*const resUser = {};
-        resUser.email = result.email;
-        resUser.username = result.username;*/
+        req.session.userId = result.id;
         const resUser = {
-          'email': result.email,
-          'username': result.username,
-          'firstname': result.firstname,
-          'lastname': result.lastname
+          email: result.email,
+          name: result.name,
+          avatar: result.avatar,
         };
         res.status(201).json(resUser);
       })
-      .catch((err) => res.json({ err }));
+      .catch((err) => res.json({ error: err.message }));
   });
 
   return router;
