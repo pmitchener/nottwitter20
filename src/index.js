@@ -13,6 +13,7 @@ const userRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const logoutRoute = require('./routes/logout');
 const signupRoutes = require('./routes/signup');
+const tweetRoutes = require('./routes/tweets');
 
 twitter20.use(express.json());
 twitter20.use(express.urlencoded({ extended: false }));
@@ -32,6 +33,7 @@ twitter20.use('/users', userRoutes(dbHelper));
 twitter20.use('/login', loginRoutes(dbHelper));
 twitter20.use('/logout', logoutRoute());
 twitter20.use('/signup', signupRoutes(dbHelper));
+twitter20.use('/tweets', tweetRoutes(dbHelper));
 
 // catch unregistered routes issue
 twitter20.use((req, res, next) => {
