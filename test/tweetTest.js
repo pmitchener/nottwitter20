@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 const twitter20 = require('../src/index');
-const agent = chai.request.agent(twitter20).keepOpen();
+const agent = chai.request.agent(twitter20);
 
 const logonUser = {
   email: 'test0@email.com',
