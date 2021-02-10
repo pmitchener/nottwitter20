@@ -23,7 +23,7 @@ describe('GET/login', () => {
     chai.request(twitter20)
       .get('/login/')
       .end((err, res) => {
-      // console.log(res);
+        // console.log(res);
         expect(res).to.have.status(200);
         expect(res.text).equal('Login route');
         // expect(res).to.be.an('object');

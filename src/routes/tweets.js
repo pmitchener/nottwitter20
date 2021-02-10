@@ -7,23 +7,23 @@ const { resource } = require('..');
 module.exports = ({tweets, addTweet, updateTweet, deleteTweet }) => {
   // get all tweet for this user.
   router.get('/', (req, res) => {
-    if(!req.session.id) {
+    if(!req.session.userId) {
       // res.status(401).send({ error: "You are not logged on. Please log on or create an account." });
       res.redirect("/login");
       return;      
     }
-    tweets(req.session.id)
+    tweets(req.session.userId)
     .then((tweets) => res.json(tweets))
     .catch((err) => res.json({ error: err.message }));
   });
 
   router.post('/', (req, res) => {
-    if(!req.session.id) {
+    if(!req.session.userId) {
       res.redirect("/login");
       return;      
     }    
     const newTweet = {
-      user_id: req.session.id,
+      user_id: req.session.userId,
       message: req.body.message
     };
     addTweet(newTweet)
@@ -35,12 +35,12 @@ module.exports = ({tweets, addTweet, updateTweet, deleteTweet }) => {
 
   // Update tweet and send back updated tweet
   router.put('/:id', (req, res) => {
-    if(!req.session.id) {
+    if(!req.session.userId) {
       res.redirect("/login");
       return;      
     } 
     const oldTweet = {
-      user_id: req.session.id,
+      user_id: req.session.userId,
       id: req.body.id,
       message: req.body.message
     };    
@@ -53,12 +53,12 @@ module.exports = ({tweets, addTweet, updateTweet, deleteTweet }) => {
 
   // delete tweet with this id
   router.delete('/:id', (req, res) => {
-    if(!req.session.id) {
+    if(!req.session.userId) {
       res.redirect("/login");
       return;      
     } 
     const oldTweet = {
-      user_id: req.session.id,
+      user_id: req.session.userId,
       id: req.body.id,
     };    
     deleteTweet(oldTweet)

@@ -11,7 +11,7 @@ describe('POST/logout', () => {
     chai.request(twitter20)
       .post('/logout/')
       .end((err, res) => {
-        //console.log(res);
+        // console.log(res);
         expect(res).to.have.status(200);
         done();
       });

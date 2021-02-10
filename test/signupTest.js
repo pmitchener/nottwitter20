@@ -25,7 +25,7 @@ describe('GET/signup', () => {
     chai.request(twitter20)
       .get('/signup/')
       .end((err, res) => {
-      // console.log(res);
+        // console.log(res);
         expect(res).to.have.status(200);
         expect(res.text).equal('Signup route');
         done();
@@ -49,7 +49,7 @@ describe('POST/signup', () => {
       .post('/signup/')
       .send(alreadyExistUser)
       .end((err, res) => {
-        //console.log("body error",res.body.error);
+        // console.log("body error",res.body.error);
         expect(res).to.have.status(200);
         expect(res.body.error).to.contain('duplicate key value violates unique constraint');
         done();
