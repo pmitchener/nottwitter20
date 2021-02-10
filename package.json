@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/nodemon -L ./src/index.js",
     "commentedout-pretest": "eslint --ignore-path .gitignore .",
-    "test": "./node_modules/.bin/mocha",
+    "test": "./node_modules/.bin/mocha --exit",
     "db:reset": "node ./db/reset.js"
   },
   "author": "Patrick Mitchener",
