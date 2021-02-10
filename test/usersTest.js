@@ -93,7 +93,7 @@ describe('PUT/users/:id', () => {
       .put('/users/3')
       .send(supermanUpdate)
       .then((res2) => {
-         console.log(`logged res.body ${res2.body[0].name}`);
+        // console.log(`logged res.body ${res2.body[0].name}`);
         expect(res2).to.have.status(200); 
         expect(res2).to.be.an('object');
         expect(res2.body).to.be.an('array');  
