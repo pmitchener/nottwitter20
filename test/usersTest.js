@@ -53,10 +53,12 @@ describe('GET/users/:id', () => {
       agent
       .get('/users/1')
       .then((res2) => {
-        // console.log("my profile", res2)
+        // console.log("my profile", res2.body);
         expect(res2).to.have.status(200); 
         expect(res2).to.be.an('object');
-        expect(res2.body).to.be.an('array');        
+        expect(res2.body).to.be.an('array'); 
+        expect(res2.body).to.have.length(1); 
+        expect(res2.body[0].email).equal('test0@email.com');               
         done();           
       });
     });
@@ -70,8 +72,8 @@ describe('GET/users/:id', () => {
       agent
       .get('/users/1000')
       .then((res2) => {
-        // console.log("my profile", res2)
-        expect(res2).to.have.status(200); 
+        // console.log("my empty profile", res2.body);
+        expect(res2).to.have.status(404); 
         expect(res2).to.be.an('object');
         expect(res2.body).to.be.an('array'); 
         expect(res2.body).to.have.length(0);       
@@ -81,7 +83,7 @@ describe('GET/users/:id', () => {
   });  
 });
 
-describe('POST/users/:id', () => {
+describe('PUT/users/:id', () => {
   it('should return one updated user', done => {
     agent.post('/login/') 
     .send(supermanLogon)
@@ -91,7 +93,7 @@ describe('POST/users/:id', () => {
       .put('/users/3')
       .send(supermanUpdate)
       .then((res2) => {
-        // console.log(`logged res.body ${res2.body[0].name}`);
+         console.log(`logged res.body ${res2.body[0].name}`);
         expect(res2).to.have.status(200); 
         expect(res2).to.be.an('object');
         expect(res2.body).to.be.an('array');  
@@ -110,8 +112,8 @@ describe('POST/users/:id', () => {
       .put('/users/1000')
       .send(notExistUser)
       .then((res2) => {
-        // console.log(res2);
-        expect(res2).to.have.status(200);
+        // console.log("not exist", res2.body);
+        expect(res2).to.have.status(404);
         expect(res2).to.be.an('object');
         expect(res2.body).to.be.an('array');
         expect(res2.body).to.have.length(0);    

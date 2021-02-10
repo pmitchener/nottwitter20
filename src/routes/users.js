@@ -16,12 +16,13 @@ module.exports = ({ updateUser, getUsers, getUserProfile }) => {
       res.redirect("/login");
       return;      
     }     
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     if(id !== req.session.userId) {
-      res.status(200).send([]);
+      console.log("returning empty");
+      res.status(404).send([]);
       return;      
     }
-    getUserProfile(id)
+    getUserProfile(req.session.userId)
       .then((user) => res.status(200).json(user))
       .catch((err) => res.json({ error: err.message }));
   });
@@ -31,13 +32,13 @@ module.exports = ({ updateUser, getUsers, getUserProfile }) => {
     if(!req.session.userId) {
       res.redirect("/login");
       return;      
-    }  
-    if(req.body.id !== req.session.userId) {
-      res.status(200).send([]);
+    }
+    if(parseInt(req.params.id) !== req.session.userId) {
+      res.status(404).send([]);
       return;      
-    }       
+    }     
     const user = {
-      id: req.body.id,
+      id: req.session.userId,
       name: req.body.name,
       password: bcrypt.hashSync(req.body.password, 10),
       avatar: req.body.avatar,
